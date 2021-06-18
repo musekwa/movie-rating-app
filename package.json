@@ -5,7 +5,7 @@
   "author": "musekwa <musekwa2011@gmail.com>",
   "private": true,
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "node server.js",
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "e2e": "node test/e2e/runner.js",
@@ -101,7 +101,7 @@
     "webpack-merge": "^4.1.0"
   },
   "engines": {
-    "node": ">= 6.0.0",
+    "node": "14.4.0",
     "npm": ">= 3.0.0"
   },
   "browserslist": [
