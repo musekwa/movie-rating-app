@@ -1,19 +1,20 @@
 <template>
+  <v-container>
   <v-layout row wrap>
-    <v-flex xs4 v-for="movie in movies" :key="movie._id">
-      <v-card>
-        <v-card-title primary-title>
+    <v-flex xs12 sm6 lg4 xl3 v-for="movie in movies" :key="movie._id">
+      <v-card max-width="400" class="mx-auto">
+        <v-card-title class="justify-center">
           <v-btn
-            class="text-blue text-center"
             text v-bind:to="`/movies/${movie._id}`">
             {{ movie.name }}
           </v-btn>
-          <v-spacer></v-spacer>
-          <p class="grey--text text-center">{{ movie.release_year }} . {{ movie.genre }}</p>
         </v-card-title>
+        <v-card-subtitle class="justify-center">
+          {{ movie.release_year }} . {{ movie.genre }}
+        </v-card-subtitle>
         <v-card-text
           class="text-justify">
-          {{ movie.description.length > 200 ? movie.description.slice(0, 200)+ '...' : movie.description   }}
+          {{ movie.description.length >= 200 ? movie.description.slice(0, 190)+ '...' : movie.description   }}
           <v-btn text v-bind:to="`/movies/${movie._id}`" >Read More</v-btn>
         </v-card-text>
 
@@ -27,8 +28,12 @@
         </div>
         <v-spacer></v-spacer>
       </v-card>
+      <br>
     </v-flex>
-    </v-layout>
+    <br>
+  </v-layout>
+  <br>
+  </v-container>
 </template>
 
 <script>
@@ -39,6 +44,8 @@ export default {
   data () {
     return {
       movies: [],
+      mostRatedMovies: [],
+      otherMovies: [],
     };
   },
   mounted(){
@@ -53,6 +60,7 @@ export default {
       })
       .then((response)=>{
         this.movies = response.data.movies;
+        
        // this.current_user = response.data.current_user
       })
       .catch(()=>{});

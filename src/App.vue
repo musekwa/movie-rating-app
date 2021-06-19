@@ -12,7 +12,7 @@
             <v-list-item-action>
               <v-icon>home</v-icon>
             </v-list-item-action>
-            <v-list-item-content>Home</v-list-item-content>
+            <v-list-item-content>MSK-Tech</v-list-item-content>
           </v-list-item>
         </router-link>
         <router-link v-bind:to="{name: 'Contact' }"
@@ -28,15 +28,18 @@
     </v-navigation-drawer>
     <v-app-bar color="indigo" dark fixed app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>Home</v-toolbar-title>
+      <v-toolbar-title>MSK-Tech</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-toolbar-items class="hidden-sm-and-down">
+      <v-toolbar-items class="d-flex">
         <v-btn id="add_movie_link" text v-bind:to="{ name: 'AddMovie' }"
           v-if="current_user">
           Add Movie
         </v-btn>
         <v-btn id="user_email" text v-if="current_user">
-          {{ current_user.email }}
+          {{ current_user.fullname.includes(' ')
+              ? current_user.fullname.slice(0, current_user.fullname.indexOf(' '))
+              : current_user.fullname
+          }}
         </v-btn>
         <v-btn text v-bind:to="{ name: 'Register' }" v-if="!current_user"
           id="register_btn">
@@ -60,7 +63,7 @@
         </div>
       </v-container>
     </v-main>
-    <v-footer color="indigo" app>
+    <v-footer class="text-center" color="indigo" app>
       <span class="white--text">&copy; 2021</span>
     </v-footer>
   </v-app>
